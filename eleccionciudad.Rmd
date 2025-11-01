@@ -1,0 +1,252 @@
+---
+title: "Elección de ciudad para realizar un máster en Estadística"
+author: "Rosa Fernández López"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true           
+    toc_depth: 2
+    number_sections: true
+    fig_caption: true
+  html_document:
+    toc: true           
+    toc_depth: 2
+    toc_float: true        
+    number_sections: true
+    fig_caption: true
+header-includes: |
+  \usepackage{fvextra}
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+  \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere=true,showspaces=false,showtabs=false}
+---
+
+```{r setup_inicial, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+\pagebreak
+
+# Introducción
+
+Este trabajo tiene como objetivo aplicar técnicas de decisión multicriterio para seleccionar la ciudad más adecuada para cursar un máster en Estadística. He elegido este tema porque, al finalizar el grado en Estadística, muchos estudiantes optamos por continuar nuestra formación con un máster especializado, y la elección de la ciudad donde cursarlo resulta clave, ya que influye tanto en la calidad académica como en las oportunidades profesionales y personales. 
+En el análisis se tienen en cuenta distintos criterios relacionados con la calidad académica y las condiciones personales y económicas, comparando seis ciudades españolas
+
+# Criterios y alternativas
+
+**Criterios evaluados**:
+
+- Oferta académica
+
+- Coste de vida
+
+- Transporte
+
+- Oportunidades laborales
+
+- Calidad de vida
+
+**Alternativas consideradas**:
+
+- Madrid
+
+- Barcelona
+
+- Sevilla
+
+- Valencia
+
+- Granada
+
+- Oviedo
+
+# Justificación de los criterios
+
+## Oferta académica
+
+Se considera la "Oferta académica" como uno de los criterios principales, ya que la calidad y variedad de los programas disponibles son determinantes a la hora de elegir la ciudad para cursar el máster. Para asignar las puntuaciones a las distintas ciudades en el criterio “Oferta académica”, se han considerado los siguientes subcriterios:
+
+- **Duración y créditos** del máster (créditos): másteres de 120 créditos o de 60 créditos. Objetivo: **maximizar**.
+
+- **Prestigio y estructura** (puntuación): universidades con documentación clara, módulos bien definidos y orientación investigadora. Objetivo: **maximizar**.
+
+> **Aclaración**
+
+> Para el criterio “Oferta académica”, se han consultado los planes de estudio oficiales de másteres en estadística en las universidades de cada ciudad. Además de analizar los planes de estudio específico, se ha consultado el ranking QS 2026 para valorar el prestigio general de las universidades. Sin embargo, dado que el criterio "Oferta académica" se centra en másteres concretos en Estadística, el ranking global no ha modificado apenas las puntuaciones asignadas.
+
+## Coste de vida
+
+El criterio "Coste de vida" se considera esencial en la elección de la ciudad, ya que afecta directamente a la viabilidad económica del estudiante durante el máster. Para asignar las puntuaciones de las distintas ciudades, se han considerado los siguiente subcriterios:
+
+- **Precio medio de alquiler** (€/mes): piso de una habitación en el centro de la ciudad. Objetivo: **minimizar**.
+
+- **Transporte público** (€/mes): coste mensual del billete y abono mensual. Objetivo: **minimizar**.
+
+- **Gastos básicos** (€/mes): precio medio de alimentación (productos como leche, pan, carne, fruta) y servicios (agua, luz, internet). Objetivo: **minimizar**.
+
+- **Ocio y entretenimiento** (€/mes): coste medio de actividades recreativas como gimansio, cine y restaurantes. Objetivo: **minimizar**.
+
+> **Aclaración**
+
+> Para el criterio "Coste de vida" se han consultado los datos actualizados de la web Numbeo (octubre 2025), comparando los subcriterios indicados.
+
+
+## Transporte
+El criterio "Transporte" evalúa la facilidad, rapidez y cobertura del sistema de transporte público desde el centro de cada ciudad hasta la universidad correspondiente. 
+Se han considerado los siguientes subcriterios para la asignación de puntuaciones:
+
+- **Tiempo medio de desplazamiento** (minutos): desde el centro hasta el campus. Objetivo: **minimizar**.
+
+- **Cobertura y frecuencia** del transporte público (número): número de líneas y frecuencia de paso. Objetivo: **maximizar**.
+
+> **Aclaración**
+
+> Para el criterio "Transporte", se han consultado las fuentes oficiales de movilidad y aplicaciones como Moovit, EMT y webs universitarias, así como mapas y horarios.
+
+
+## Oportunidades laborales
+
+El criterio "Oportunidades laborales" evalúa la posibilidad de encontrar empleo en el ámbito de la estadística en cada ciudad, tanto por la tasa de inserción laboral como por la oferta actual de empleo.
+Se han considerado los siguientes subcriterios:
+
+- **Tasa de empleo** de titulados en estadística según el INE (2019) (%). Objetivo: **maximizar**.
+
+- **Volumen de ofertas actuales** en portales como InfoJobs (%). Objetivo: **maximizar**.
+
+
+> **Aclaración**
+
+> Para el criterio "Oportunidades laborales", se han consultado datos del Instituto Nacional de Estadística (INE) sobre la tasa de empleo de titulados en Estadística por comunidad autónoma, así como el volumen de ofertas actuales en InfoJobs (octubre 2025).
+
+## Calidad de vida
+
+El criterio "Calidad de vida" evalúa el bienestar general que ofrece cada ciudad. Aunque no afecta directamente al contenido académico, si influye en la experiencia personal, el entorno diario y el equilibrio entre estudio y vida. 
+Se han considerado los siguientes subcriterios:
+
+- **Índice general de calidad de vida**: para comparar el bienestar general entre ciudades. Objetivo: **maximizar**.
+
+- **Seguridad y sanidad**: ciudades con buena atención médica y bajos índices de criminalidad obtienen mejor puntuación. Objetivo: **maximizar**.
+
+> **Aclaración**
+
+> Para el criterio "Calidad de vida", se han consultado los datos actualizados de Numbeo (octubre 2025).
+
+\pagebreak
+
+# Planteamiento del problema
+
+```{r}
+source("teoriadecision_funciones_multicriterio.R")
+source("teoriadecision_funciones_multicriterio_diagram.R")
+source("teoriadecision_funciones_multicriterio_utiles.R")
+```
+
+## Matriz de decisión
+
+Vamos a construir la matriz de decisión con los valores de los subcriterios para cada ciudad.
+
+```{r}
+library(knitr)
+library(kableExtra)
+
+# Matriz de decisiones
+p_ciudades_sub= multicriterio.crea.matrizdecision(c(
+  #Madrid
+  120, 57.1, -803.4, -36, -300, -55, -22, 210, 90.5, 100, 177.98, 75.67,
+  #Barcelona
+  60, 61, -796.8, -23, -190, -60, -32, 100, 91.1, 90, 144.17, 62.37,
+  #Sevilla
+  0, 33.7, -676.6, -35.30, -120, -46, -28, 51, 80, 40, 173.47, 68.31,
+  #Valencia
+  60, 35.7, -689.4, -30, -155, -44, -33, 80, 84.1, 50, 203.97, 72.32, 
+  #Granada
+  60, 37.4, -659.4, -35, -170, -68, -18, 12, 80, 15, 184.12, 70.82,
+  #Oviedo
+  60, 23, -704.5, -30, -160, -50, -23, 16, 78, 10, 205.39, 83.48
+), numalternativas = 6, numcriterios = 12)
+p_ciudades_sub
+
+kable(p_ciudades_sub, caption = "Matriz de decisión con subcriterios", digits = 2)
+```
+
+\pagebreak
+
+# Aplicación de métodos multicriterio
+
+## Método ELECTRE
+
+El método ELECTRE trata de separar el conjunto de todas las alternativas en dos subconjuntos, uno formado por las alternativas más favorables y otro formado por las peores opciones, y todo ello con ayuda de un grafo. El método funciona de forma secuencial, reduciendo el conjunto de alternativas favorables, hasta obtener una sola.
+**
+ Podemos diferenciar **tres fases** en el método ELECTRE:
+
+- Test de concordancia.
+
+- Test de discordancia.
+
+- Construcción del grafo de sobreclasificación.
+
+```{r}
+salida_electre= multicriterio.metodoELECTRE_I(p_ciudades_sub, pesos.criterios = c(0.2, 0.05, 0.1, 0.08, 0.1, 0.06, 0.1, 0.05, 0.1, 0.06, 0.04, 0.06), nivel.concordancia.minimo.alpha = 0.7, no.se.compensan=c(Inf, Inf, 100, 30,100, 50, 15, Inf, Inf, Inf, 30,20), que.alternativas = TRUE )
+qgraph::qgraph(salida_electre$relacion.dominante)
+salida_electre$nucleo_aprox
+```
+> **Conclusión**
+
+> El grafo generado muestra relaciones de dominancia entre algunas ciudades, destancando:
+ - **Granada** (a5) domina a **Sevilla** (a3).
+- **Valencia** (a4) domina a **Oviedo** (a6) y a **Sevilla** (a3).
+Por el núcleo obtenido vemos que **Madrid** (a1), **Barcelona** (a2), **Valencia** (a4), y **Granada** (a5) no son dominadas por ninguna otra ciudad. Esto implica que:
+- Estas ciudades son robustas frente a las demás según los criterios evaluados.
+- Son las mejores candidatas para continuar en el análisis.
+
+Para intentar quedarse con una única alternativa óptima: reducir el grado a las alternativas en el núcelo y/o reducir el valor de alpha $\in$ [0.5,1).
+
+```{r}
+salida_electreb= multicriterio.metodoELECTRE_I(p_ciudades_sub, pesos.criterios = c(0.2, 0.05, 0.1, 0.08, 0.1, 0.06, 0.1, 0.05, 0.1, 0.06, 0.04, 0.06), nivel.concordancia.minimo.alpha = 0.7, no.se.compensan =c(Inf, Inf, 100, 30,100, 50, 15, Inf, Inf, Inf, 30,20), que.alternativas = c(1,2,4,5) )
+qgraph::qgraph(salida_electreb$relacion.dominante)
+salida_electreb$nucleo_aprox
+```
+
+> **Conclusión**
+
+> El grafo generado no muestra nuevas relaciones de dominancia entre las ciudades del núcleo.
+El núcleo aproximado sigue incluyendo las mismas ciudades. 
+Esto indica que, bajo alpha=0.7 y los umbrales de discordancia definidos, no existe una ciudad que domine claramente a las demás dentro del núcleo.
+
+Como hemos reducido las alternativas antes, vamos a ver ahora si reducimos alpha.
+
+```{r}
+salida_electrec= multicriterio.metodoELECTRE_I(p_ciudades_sub, pesos.criterios = c(0.2, 0.05, 0.1, 0.08, 0.1, 0.06, 0.1, 0.05, 0.1, 0.06, 0.04, 0.06), nivel.concordancia.minimo.alpha = 0.5, no.se.compensan =c(Inf, Inf, 100, 30,100, 50, 15, Inf, Inf, Inf, 30,20), que.alternativas = c(1,2,4,5) )
+qgraph::qgraph(salida_electrec$relacion.dominante)
+salida_electrec$nucleo_aprox
+```
+> **Conclusión**
+
+> El grafo generado muestra una nueva relación de dominancia: **Granada** (a5) domina a **Barcelona** (a2), por ello, se excluye del nñucleo. Este incluye únicamente tres ciudades: **Madrid** (a1), **Valencia** (a4), **Granada** (a5).
+Esto demuestra que ajustar los parámetros del modelo puede modificar el conjunto de alternativas óptimas, revelando nuevas relaciones de preferencia entre ciudades.
+Aunque no obtenemos una única ciudad como solución, **Madrid, Valencia y Granada** se consolidan como las ciudades más favorables para cursar el máster en Estadística según este método.
+
+## Método ELECTRE I
+
+```{r}
+e1=func_ELECTRE_Completo(salida_electre)
+e1$Grafo
+```
+
+```{r}
+qgraph::qgraph(e1$Grafo)
+```
+
+```{r}
+e1$Nucleo 
+```
+
+> **Conclusión**
+
+> Las ciudades del núcleo (**Madrid (a1), Barcelona (a2), Valencia (a4), y Granada (a5)**)presentan fortalezas equilibradas en los distintos subcriterios evaluados, lo que les permite resistir comparaciones desfavorables frente al resto.
+Por el contrario, **Sevilla (a3) y Oviedo (a6)** han sido dominadas por otras ciudades, lo que sugiere que, bajo este modelo, **no son las opciones más recomendables** para cursar el máster en Estadística.
+
+\pagebreak
+
+## Método PROMETHEE
+
+
