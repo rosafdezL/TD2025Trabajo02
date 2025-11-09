@@ -1,0 +1,195 @@
+Version: 2.0
+
+Alternatives: &alternatives
+  Madrid:
+  Barcelona:
+  Sevilla:
+  Valencia:
+  Granada:
+  Oviedo:
+  
+Goal: 
+  name: Selección de Ciudad para máster
+  preferences:
+    pairwise:
+      - [Créditos, Alquiler, 2]
+      - [Créditos, Transporte, 2]
+      - [Créditos, Gastos Básicos, 2]
+      - [Créditos, Tiempo Desplazamiento, 3]
+      - [Créditos, Empleo, 2]
+      - [Créditos, Índice Calidad de Vida, 1/4]
+      - [Créditos, Seguridad y Sanidad, 1/5]
+      - [Alquiler, Transporte, 2]
+      - [Alquiler, Gastos Básicos, 2]
+      - [Alquiler, Tiempo Desplazamiento, 3]
+      - [Alquiler, Empleo, 2]
+      - [Alquiler, Índice Calidad de Vida, 1/4]
+      - [Alquiler, Seguridad y Sanidad, 2]
+      - [Transporte, Gastos Básicos, 2]
+      - [Transporte, Tiempo Desplazamiento, 3]
+      - [Transporte, Empleo, 2]
+      - [Transporte, Índice Calidad de Vida, 1/3]
+      - [Transporte, Seguridad y Sanidad, 5]
+      - [Gastos Básicos, Tiempo Desplazamiento, 2]
+      - [Gastos Básicos, Empleo, 1]
+      - [Gastos Básicos, Índice Calidad de Vida, 1/3]
+      - [Gastos Básicos, Seguridad y Sanidad, 6]
+      - [Tiempo Desplazamiento, Empleo, 1/2]
+      - [Tiempo Desplazamiento, Índice Calidad de Vida, 1/4]
+      - [Tiempo Desplazamiento, Seguridad y Sanidad, 1/5]
+      - [Empleo, Índice Calidad de Vida, 1/3]
+      - [Empleo, Seguridad y Sanidad, 2]
+      - [Índice Calidad de Vida, Seguridad y Sanidad, 2]
+  children:
+    Créditos:
+      preferences:
+        pairwise:
+          - [Madrid, Barcelona, 3]
+          - [Madrid, Sevilla, 7]
+          - [Madrid, Valencia, 5]
+          - [Madrid, Granada, 5]
+          - [Madrid, Oviedo, 5]
+          - [Barcelona, Sevilla, 6]
+          - [Barcelona, Valencia, 4]
+          - [Barcelona, Granada, 4]
+          - [Barcelona, Oviedo, 4]
+          - [Sevilla, Valencia, 1/2]
+          - [Sevilla, Granada, 1]
+          - [Sevilla, Oviedo, 2]
+          - [Valencia, Granada, 2]
+          - [Valencia, Oviedo, 3]
+          - [Granada, Oviedo, 2]
+      children: *alternatives
+    Alquiler:
+      preferences:
+        pairwise:
+          - [Madrid, Barcelona, 1/2]
+          - [Madrid, Sevilla, 1/7]
+          - [Madrid, Valencia, 1/6]
+          - [Madrid, Granada, 1/8]
+          - [Madrid, Oviedo, 1/7]
+          - [Barcelona, Sevilla, 1/6]
+          - [Barcelona, Valencia, 1/5]
+          - [Barcelona, Granada, 1/7]
+          - [Barcelona, Oviedo, 1/6]
+          - [Sevilla, Valencia, 3]
+          - [Sevilla, Granada, 2]
+          - [Sevilla, Oviedo, 3]
+          - [Valencia, Granada, 1/2]
+          - [Valencia, Oviedo, 2]
+          - [Granada, Oviedo, 3]
+      children: *alternatives
+    Transporte:
+      preferences:
+        pairwise:
+          - [Madrid, Barcelona, 3]
+          - [Madrid, Sevilla, 5]
+          - [Madrid, Valencia, 4]
+          - [Madrid, Granada, 5]
+          - [Madrid, Oviedo, 5]
+          - [Barcelona, Sevilla, 4]
+          - [Barcelona, Valencia, 3]
+          - [Barcelona, Granada, 4]
+          - [Barcelona, Oviedo, 4]
+          - [Sevilla, Valencia, 1/2]
+          - [Sevilla, Granada, 1]
+          - [Sevilla, Oviedo, 2]
+          - [Valencia, Granada, 2]
+          - [Valencia, Oviedo, 3]
+          - [Granada, Oviedo, 2]
+      children: *alternatives
+    Gastos Básicos:
+      preferences:
+        pairwise:
+          - [Madrid, Barcelona, 1/3]
+          - [Madrid, Sevilla, 1/7]
+          - [Madrid, Valencia, 1/5]
+          - [Madrid, Granada, 1/6]
+          - [Madrid, Oviedo, 1/6]
+          - [Barcelona, Sevilla, 1/5]
+          - [Barcelona, Valencia, 1/3]
+          - [Barcelona, Granada, 1/4]
+          - [Barcelona, Oviedo, 1/4]
+          - [Sevilla, Valencia, 3]
+          - [Sevilla, Granada, 2]
+          - [Sevilla, Oviedo, 3]
+          - [Valencia, Granada, 1/2]
+          - [Valencia, Oviedo, 2]
+          - [Granada, Oviedo, 3]
+      children: *alternatives
+    Tiempo Desplazamiento:
+      preferences:
+        pairwise:
+          - [Madrid, Barcelona, 3]
+          - [Madrid, Sevilla, 1/2]
+          - [Madrid, Valencia, 2]
+          - [Madrid, Granada, 1/3]
+          - [Madrid, Oviedo, 1/2]
+          - [Barcelona, Sevilla, 1/5]
+          - [Barcelona, Valencia, 1/3]
+          - [Barcelona, Granada, 1/6]
+          - [Barcelona, Oviedo, 1/5]
+          - [Sevilla, Valencia, 3]
+          - [Sevilla, Granada, 1/2]
+          - [Sevilla, Oviedo, 2]
+          - [Valencia, Granada, 1/4]
+          - [Valencia, Oviedo, 1/2]
+          - [Granada, Oviedo, 3]
+      children: *alternatives
+    Empleo:
+      preferences:
+        pairwise:
+          - [Madrid, Barcelona, 1]
+          - [Madrid, Sevilla, 5]
+          - [Madrid, Valencia, 4]
+          - [Madrid, Granada, 5]
+          - [Madrid, Oviedo, 6]
+          - [Barcelona, Sevilla, 5]
+          - [Barcelona, Valencia, 4]
+          - [Barcelona, Granada, 5]
+          - [Barcelona, Oviedo, 6]
+          - [Sevilla, Valencia, 1/2]
+          - [Sevilla, Granada, 2]
+          - [Sevilla, Oviedo, 3]
+          - [Valencia, Granada, 3]
+          - [Valencia, Oviedo, 4]
+          - [Granada, Oviedo, 2]
+      children: *alternatives
+    Índice Calidad de Vida:
+      preferences:
+        pairwise:
+          - [Madrid, Barcelona, 3]
+          - [Madrid, Sevilla, 1/2]
+          - [Madrid, Valencia, 1/3]
+          - [Madrid, Granada, 1/2]
+          - [Madrid, Oviedo, 1/4]
+          - [Barcelona, Sevilla, 1/4]
+          - [Barcelona, Valencia, 1/5]
+          - [Barcelona, Granada, 1/3]
+          - [Barcelona, Oviedo, 1/6]
+          - [Sevilla, Valencia, 1/2]
+          - [Sevilla, Granada, 1]
+          - [Sevilla, Oviedo, 1/2]
+          - [Valencia, Granada, 2]
+          - [Valencia, Oviedo, 1]
+          - [Granada, Oviedo, 1/2]
+      children: *alternatives
+    Seguridad y Sanidad:
+      preferences:
+        pairwise:
+          - [Madrid, Barcelona, 3]
+          - [Madrid, Sevilla, 4]
+          - [Madrid, Valencia, 2]
+          - [Madrid, Granada, 3]
+          - [Madrid, Oviedo, 1/2]
+          - [Barcelona, Sevilla, 2]
+          - [Barcelona, Valencia, 1/2]
+          - [Barcelona, Granada, 1]
+          - [Barcelona, Oviedo, 1/4]
+          - [Sevilla, Valencia, 1/3]
+          - [Sevilla, Granada, 1/2]
+          - [Sevilla, Oviedo, 1/5]
+          - [Valencia, Granada, 2]
+          - [Valencia, Oviedo, 1/3]
+          - [Granada, Oviedo, 1/4]
+      children: *alternatives
